@@ -1,9 +1,14 @@
-<%-- Created by IntelliJ IDEA. --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Lenovo
+  Date: 06.06.2019
+  Time: 23:54
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Authorize</title>
     <style>
         body
         {
@@ -43,24 +48,14 @@
             margin: 3%;
         }
     </style>
-    <script>
-        function retrieveTime() {
-            var request = new XMLHttpRequest();
-            request.onreadystatechange = function() {
-                if (request.readyState === 4) {
-                    var result = request.response;
-                    alert(result);
-                }
-            };
-            request.open("GET", "getTime");
-            request.send();
-        }
-    </script>
+
 </head>
 <body>
-<button onclick="retrieveTime()">Current date</button>
 <fieldset>
-    <form method="POST" action="GoToLogin">
+    <legend>Authorize</legend>
+    <form method="POST" action="login">
+        <input name="login" type="text" placeholder="login"/>
+        <input name="password" type="password" placeholder="password"/>
         <input type="submit" value="Sign up"/>
     </form>
 </fieldset>

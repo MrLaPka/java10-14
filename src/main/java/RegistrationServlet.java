@@ -1,6 +1,8 @@
 import connection.ConnectionException;
 import connection.UserDao;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,10 +27,13 @@ public class RegistrationServlet extends HttpServlet {
                 writer.println("This account already exists");
             } else {
                 userDao.addUser(login, password);
-                writer.println("Registration complete");
+                String path = "/GoToLogin";
+                ServletContext servletContext = getServletContext();
+                RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
+                requestDispatcher.forward(req, resp);
             }
         } catch( SQLException | ClassNotFoundException | ConnectionException ex) {
-            writer.println(Arrays.toString(ex.getStackTrace()));
+            ex.printStackTrace();
         }
     }
 }

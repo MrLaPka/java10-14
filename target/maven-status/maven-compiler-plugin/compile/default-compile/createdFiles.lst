@@ -1,0 +1,8 @@
+connection\ConnectionCreator.class
+GoToRegister.class
+AuthorizeServlet.class
+RegistrationServlet.class
+connection\ConnectionException.class
+connection\UserDao.class
+GoToLogin.class
+Servlet.class
