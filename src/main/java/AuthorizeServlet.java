@@ -23,24 +23,12 @@ public class AuthorizeServlet extends HttpServlet {
         try {
             UserDao userDao = new UserDao();
             if (userDao.checkFor(login, password)) {
-                writer.println("<fieldset>\n" +
-                        "    <form method=\"POST\" action=\"index.jsp\">\n" +
-                        "        <input type=\"submit\" value=\"Exit\"/>\n" +
-                        "    </form>\n" +
-                        "</fieldset>");
-                writer.println("Hello, " + login);
-                writer.println("Set to cookies");
-                writer.println("Last login: " + userDao.getLoginTimestamp(login)+1);
-                writer.println("Login number: " + userDao.getLoginNumber(login)+1);
-                writer.println("<table>\n" +
-                        "<tr><th>Name</th><th>Tel</th><th>email</th></tr> \n" +
-                        "<tr><td>Anna</td><td>80251234567</td><td>anna@mail.ru</td></tr>\n" +
-                        "<tr><td>Max</td><td>80253344635</td><td>Max@mail.ru</td></tr>" +
-                        "<tr><td>Goga</td><td>80254546563</td><td>Goga@mail.ru</td></tr>" +
-                        "<tr><td>Pasha</td><td>80297654321</td><td>Pasha@mail.ru</td></tr>" +
-                        "</table>");
                 resp.addCookie(new Cookie("last_login", userDao.getLoginTimestamp(login).toString()));
                 resp.addCookie(new Cookie("login_number", Integer.toString(userDao.getLoginNumber(login))));
+                req.setAttribute("login", login);
+                req.setAttribute("last", userDao.getLoginTimestamp(login));
+                req.setAttribute("loginNumber", userDao.getLoginNumber(login)+1);
+                getServletContext().getRequestDispatcher("/welcome.jsp").forward(req, resp);
             } else {
                 writer.println("Access denied");
             }

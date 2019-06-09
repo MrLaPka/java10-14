@@ -39,7 +39,7 @@ public class UserDao {
         if (resultSet.next()) {
             String retrievedPassword = resultSet.getString(1);
             if (retrievedPassword.equals(password)) {
-                connection.prepareStatement("UPDATE users SET login_number = login_number + 1 WHERE login='" + login + "'");
+                connection.prepareStatement("SET SQL_SAFE_UPDATES = 0;UPDATE users SET login_number = login_number + 1 WHERE login='" + login + "'");
                 return true;
             }
         }
